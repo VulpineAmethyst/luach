@@ -39,4 +39,16 @@ public:
     long toAbsoluteDateFromHebrew(void);
     long toAbsoluteDateFromGregorian(void);
 
+    int getWeekDay() {
+        return static_cast<int>((this->gregorian ? this->toAbsoluteDateFromGregorian() : this->toAbsoluteDateFromHebrew()) % 7);
+    }
+    bool isNthWeekDay(int n, int day) {
+        int now = this->getWeekDay();
+        if (now == day) {
+            if ((this->day / 7) == n) {
+                return true;
+            }
+        }
+        return false;
+    }
 };
